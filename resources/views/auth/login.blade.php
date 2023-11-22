@@ -2,6 +2,16 @@
 
 @section('content')
 <div class="container">
+    @if (session("suspend"))
+        <div class="alert alert-danger">
+            {{session("suspend")}}
+        </div>
+    @endif
+    @if (session("message"))
+            <div class=" alert alert-success">
+                {{session("message")}}
+            </div>
+    @endif
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -57,11 +67,14 @@
                                     {{ __('Login') }}
                                 </button>
 
-                                @if (Route::has('password.request'))
+                                {{-- @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}
                                     </a>
-                                @endif
+                                @endif --}}
+                                <a class="btn btn-link" href="{{ route("password.forget") }}">
+                                    {{ __('Forgot Your Password?') }}
+                                </a>
                             </div>
                         </div>
                     </form>

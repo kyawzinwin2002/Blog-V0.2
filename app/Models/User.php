@@ -12,6 +12,21 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    public function role()
+    {
+      return  $this->belongsTo(Role::class);
+    }
+
+    public function articles()
+    {
+        return $this->hasMany(Article::class);
+    }
+
+    public function categories()
+    {
+        return $this->hasMany(Category::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *
@@ -21,6 +36,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        "user_token",
+        "remember_token",
+
     ];
 
     /**
@@ -31,6 +49,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        "user_token",
+        "role_id",
+
     ];
 
     /**
